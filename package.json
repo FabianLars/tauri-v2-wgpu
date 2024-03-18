@@ -1,5 +1,5 @@
 {
-  "name": "alpha-desktop",
+  "name": "beta-desktop",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,14 +9,8 @@
     "preview": "vite preview",
     "tauri": "tauri"
   },
-  "dependencies": {
-    "@tauri-apps/api": "2.0.0-alpha.12",
-    "@tauri-apps/plugin-shell": "2.0.0-alpha.3",
-    "@tauri-apps/plugin-updater": "2.0.0-alpha.3",
-    "@tauri-apps/plugin-websocket": "2.0.0-alpha.3"
-  },
   "devDependencies": {
-    "@tauri-apps/cli": "2.0.0-alpha.18",
+    "@tauri-apps/cli": "2.0.0-beta.10",
     "typescript": "^5.3.3",
     "vite": "^4.5.1"
   }

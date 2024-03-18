@@ -14,12 +14,12 @@ fn greet(name: &str) -> String {
 fn main() {
     tauri::Builder::default()
         .setup(|app| {
-            let window = app.get_window("main").unwrap();
+            let window = app.get_webview_window("main").unwrap();
             let size = window.inner_size()?;
 
             let instance = wgpu::Instance::default();
 
-            let surface = unsafe { instance.create_surface(&window) }.unwrap();
+            let surface = instance.create_surface(window).unwrap();
             let adapter = block_on(instance.request_adapter(&wgpu::RequestAdapterOptions {
                 power_preference: wgpu::PowerPreference::default(),
                 force_fallback_adapter: false,
@@ -33,9 +33,9 @@ fn main() {
                 adapter.request_device(
                     &wgpu::DeviceDescriptor {
                         label: None,
-                        features: wgpu::Features::empty(),
+                        required_features: wgpu::Features::empty(),
                         // Make sure we use the texture resolution limits from the adapter, so we can support images the size of the swapchain.
-                        limits: wgpu::Limits::downlevel_webgl2_defaults()
+                        required_limits: wgpu::Limits::downlevel_webgl2_defaults()
                             .using_resolution(adapter.limits()),
                     },
                     None,
@@ -99,6 +99,7 @@ fn fs_main() -> @location(0) vec4<f32> {
                 present_mode: wgpu::PresentMode::Fifo,
                 alpha_mode: swapchain_capabilities.alpha_modes[0],
                 view_formats: vec![],
+                desired_maximum_frame_latency: 2,
             };
 
             surface.configure(&device, &config);
